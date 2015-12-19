@@ -1,0 +1,26 @@
+#!/bin/csh -f
+
+# Input arguments are Q2 (GeV/c)^2 and parameter input file (e.g.- param-orig)
+
+ set q2        = $1
+ set paramfile = $2
+
+ echo $q2 0 $paramfile -q$q2 | allk
+
+# Output files
+
+# hlee-**pi-q* are multipole tables for PP,PN,NP,NN
+# where PP=p-pizero NP=n-piplus PN=p-piminus NN=n-pizero
+
+# m1p.vec, m1m.vec etc are multipole tables for reaction channels
+# Columns: Q2 W ctmul cbmul cbrmul cbdmul cdmul (real,imag) (pizero-p only)
+
+# See subroutine mulwrite in allk_lib_new.F for details of above
+
+# allk-pi0,pip.tbl are cross section tables
+# Columns: W Q2 epsilon cos* phi* crs crs*0.1 dum dum dum
+
+# rspf-allk-pi0,pip.tbl  Response functions 
+
+# See subroutine allk_output.F and allk_run.F for details of response functions
+# contained in array robs

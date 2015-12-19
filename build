@@ -1,0 +1,9 @@
+rm lib*.a
+rm *.o
+gfortran -funroll-all-loops -O -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer -DLinux -fPIC -c allk.F -o allk.o
+gfortran -funroll-all-loops -O -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer -DLinux -fPIC -c allk_run.F -o allk_run.o
+gfortran -funroll-all-loops -O -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer -DLinux -fPIC -c allk_lib_new.F -o allk_lib_new.o
+gfortran -funroll-all-loops -O -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer -DLinux -fPIC -c allk_mathlib.F -o allk_mathlib.o
+gfortran -funroll-all-loops -O -fno-automatic -ffixed-line-length-none -fno-second-underscore -funroll-loops -fomit-frame-pointer -DLinux -fPIC -c allk_output.F -o allk_output.o
+ar r liballk.a allk_lib_new.o allk_mathlib.o allk_output.o allk_run.o
+gfortran -O -fno-automatic -finit-local-zero -ffixed-line-length-none -fno-second-underscore allk.o -L. -lallk -lgfortran -o run/allk
